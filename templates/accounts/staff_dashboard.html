@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Staff Dashboard{% endblock %}
+
+{% block sidebar %}
+    <a href="/staff/dashboard/">Dashboard</a>
+    <a href="{% url 'logout' %}">Logout</a>
+
+{% endblock %}
+
+{% block content %}
+<h2>Staff Dashboard</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Update</th>
+        <th>Chat</th>
+    </tr>
+
+    {% for c in complaints %}
+    <tr>
+        <td>{{ c.id }}</td>
+        <td>{{ c.user.username }}</td>
+        <td>{{ c.title }}</td>
+        <td>{{ c.status }}</td>
+        <td><a href="/staff/complaint/{{ c.id }}/update/">Update</a></td>
+        <td>
+            {% if c.status != 'Solved' %}
+                <a href="/chat/{{ c.id }}/">Chat</a>
+            {% else %}
+                Closed
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

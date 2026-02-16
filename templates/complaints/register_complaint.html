@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}New Complaint{% endblock %}
+
+{% block sidebar %}
+    <a href="/user/dashboard/">Dashboard</a>
+    <a href="/complaint/new/">New Complaint</a>
+    <a href="{% url 'logout' %}">Logout</a>
+{% endblock %}
+
+{% block content %}
+<h2>Register Complaint</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Complaint Title" required><br><br>
+    <textarea name="description" placeholder="Complaint Description" required></textarea><br><br>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

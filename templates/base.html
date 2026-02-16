@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}CMS{% endblock %}</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #202020;
+    color: white;
+    position: fixed;
+    transition: width 0.3s;
+    overflow: hidden;
+}
+
+/* when collapsed */
+.sidebar.hidden {
+    width: 60px;
+}
+
+/* hide text when collapsed */
+.sidebar.hidden a {
+    text-align: center;
+    font-size: 0;
+}
+
+/* show icon only (using first letter or symbol) */
+.sidebar.hidden a::first-letter {
+    font-size: 18px;
+}
+
+
+        .sidebar.hidden {
+            width: 60px;
+        }
+
+        .sidebar a {
+    display: block;
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+
+        .sidebar a:hover {
+            background: #383838;
+        }
+
+        .topbar {
+            height: 50px;
+            background: #111;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            margin-left: 220px;
+            transition: 0.3s;
+        }
+
+        .topbar.full {
+            margin-left: 60px;
+        }
+
+        .menu-btn {
+            font-size: 22px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .content.full {
+            margin-left: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar" id="sidebar">
+    {% block sidebar %}{% endblock %}
+</div>
+
+<div class="topbar" id="topbar">
+    <span class="menu-btn" onclick="toggleSidebar()">☰</span>
+    <span>Complaint Management System</span>
+</div>
+
+<div class="content" id="content">
+    {% block content %}{% endblock %}
+</div>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("hidden");
+        document.getElementById("topbar").classList.toggle("full");
+        document.getElementById("content").classList.toggle("full");
+    }
+</script>
+
+</body>
+</html>

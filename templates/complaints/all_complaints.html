@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Complaints - Admin</title>
+</head>
+<body>
+
+<h2>All Complaints (Admin Panel)</h2>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Assigned To</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+
+    {% for c in complaints %}
+    <tr>
+        <td>{{ c.id }}</td>
+        <td>{{ c.user.username }}</td>
+        <td>{{ c.title }}</td>
+        <td>{{ c.status }}</td>
+
+        <td>
+            {% if c.assigned_staff %}
+                {{ c.assigned_staff.username }}
+            {% else %}
+                Not Assigned
+            {% endif %}
+        </td>
+
+        <td>{{ c.created_at }}</td>
+
+        <td>
+            <a href="/admin-panel/complaints/{{ c.id }}/assign/">
+                Assign
+            </a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="7">No complaints found</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/admin-panel/dashboard/">⬅ Back to Dashboard</a>
+
+</body>
+</html>

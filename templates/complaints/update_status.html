@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Update Status{% endblock %}
+
+{% block sidebar %}
+    <a href="/staff/dashboard/">Dashboard</a>
+    <a href="{% url 'logout' %}">Logout</a>
+{% endblock %}
+
+{% block content %}
+<h2>Update Complaint Status</h2>
+
+<p><strong>{{ complaint.title }}</strong></p>
+
+<form method="post">
+    {% csrf_token %}
+    <select name="status">
+        <option value="In Progress">In Progress</option>
+        <option value="Solved">Solved</option>
+    </select>
+    <br><br>
+    <button type="submit">Update</button>
+</form>
+{% endblock %}
