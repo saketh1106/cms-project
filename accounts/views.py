@@ -153,3 +153,12 @@ from django.contrib.auth import logout
 def logout_view(request):
     logout(request)
     return redirect('user_login')
+
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def create_admin(request):
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser("admin", "admin@example.com", "Admin123")
+        return HttpResponse("Superuser created!")
+    return HttpResponse("Superuser already exists!")
