@@ -158,7 +158,12 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 def create_admin(request):
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser("admin", "admin@example.com", "Admin123")
-        return HttpResponse("Superuser created!")
-    return HttpResponse("Superuser already exists!")
+    user, created = User.objects.get_or_create(username="admin")
+    user.set_password("Admin123")  # reset password to Admin123
+    user.is_superuser = True
+    user.is_staff = True
+    user.save()
+
+    if created:
+        return HttpResponse("Superuser created and password set!")
+    return HttpResponse("Superuser already exists, password reset!")
