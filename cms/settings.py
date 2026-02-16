@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-cu*-p6eti741$(dz-8fgmxpl6+c*bu66oudd=vhz(l@_3(zv@6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cms-project-p7yw.onrender.com']
+
 
 
 
